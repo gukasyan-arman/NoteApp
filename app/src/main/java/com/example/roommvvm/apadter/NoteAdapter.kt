@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roommvvm.R
 import com.example.roommvvm.databinding.ItemLayoutBinding
 import com.example.roommvvm.model.NoteModel
+import com.example.roommvvm.screens.start.StartFragment
 import kotlinx.android.synthetic.main.item_layout.view.*
 
 class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
@@ -42,4 +43,14 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         notifyDataSetChanged()
     }
 
+    override fun onViewAttachedToWindow(holder: NoteViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.itemView.setOnClickListener {
+            StartFragment.clickNote(listNote[holder.adapterPosition])
+        }
+    }
+
+    override fun onViewDetachedFromWindow(holder: NoteViewHolder) {
+        holder.itemView.setOnClickListener(null)
+    }
 }
